@@ -340,7 +340,7 @@ type = 2
 default_ToB = 1
 clean_ToB = 1
 STR_VAR
-dv = "l#dva"
+dv = "L#XZE"
 override_SoA = "L#xze"
 override_ToB = "L#xze25"
 dialog_ToB = "L#xze25"

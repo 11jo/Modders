@@ -330,7 +330,7 @@ type = 2 // NPC is summon-able if met before
 default_ToB = 1
  clean_ToB = 1
 STR_VAR
-dv = "VxVar" // death variable of your NPC
+dv = "VARSHOON" // death variable of your NPC
 override_SoA = "VxVar" // override script of your NPC (SoA)
 override_ToB = "VxVar25" // override script of your NPC (ToB)
 cre_ToB = "vxvar25"
@@ -338,7 +338,7 @@ dialog_ToB = "VXVAR25" // joining dialogue for ToB
 traFile = EVAL "Varshoon/Languages/%LANGUAGE%/FateSpirit.tra"
 string = "@0"
 stringPosDV = "Viconia" 
-clean_ToB_DV = "VxVar"
+clean_ToB_DV = "VARSHOON"
 END
 END ELSE BEGIN
 COMPILE ~Varshoon/DIALOGUES/FateSpirit.d~ USING ~Varshoon/Languages/%LANGUAGE%/FateSpirit.tra~
