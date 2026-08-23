@@ -1,0 +1,503 @@
+BACKUP ~Varshoon\backup~
+AUTHOR ~Lava Del'Vortel~
+README ~Varshoon/Varshoon-ReadMe.txt~
+
+VERSION ~v8.2~
+
+AUTO_TRA ~Varshoon/languages/%s~
+
+
+  // any tra files used in LANGUAGE need to be reloaded after UTF-8 conversion
+
+ALWAYS
+
+ACTION_IF (GAME_IS ~eet~) BEGIN
+  OUTER_SET bg2_chapter = 12
+END ELSE BEGIN
+  OUTER_SET bg2_chapter = 0
+END
+OUTER_FOR (i=1; i<=10; i=i+1) BEGIN
+  OUTER_SET bg2_chapter = bg2_chapter + 1
+  OUTER_SPRINT name_source ~bg2_chapter_%i%~
+  OUTER_SET EVAL ~%name_source%~ = bg2_chapter
+END
+
+  ACTION_DEFINE_ARRAY VARxnoconvert BEGIN install END
+  ACTION_DEFINE_ARRAY VARxreload BEGIN setup END
+  
+  LAF HANDLE_CHARSETS
+    INT_VAR
+      infer_charsets = 1
+    STR_VAR
+      tra_path = EVAL ~%MOD_FOLDER%/Languages~
+      noconvert_array = VARxnoconvert
+      reload_array = VARxreload
+  END
+ END
+LANGUAGE ~English~
+         ~english~
+         ~Varshoon/languages/english/setup.tra~
+         
+LANGUAGE ~Italian (by Ilot)~
+         ~italian~
+         ~Varshoon/languages/italian/setup.tra~
+
+LANGUAGE ~Russian (by subzero400)~
+         ~russian~
+         ~Varshoon/languages/russian/setup.tra~
+
+LANGUAGE ~French (by Le Marquis)~
+         ~french~
+         ~Varshoon/languages/french/setup.tra~
+
+LANGUAGE ~Simplified Chinese (by MephistoSatanDevil)~
+         ~schinese~
+         ~Varshoon/languages/schinese/install.tra~
+
+BEGIN @0
+LABEL L#-VARSHOON
+
+// Adds CD_STATE_NOTVALID state
+
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~
+
+UNLESS ~CD_STATE_NOTVALID~
+
+////////////////////////NewBams
+
+COPY ~Varshoon\BAM\TNTCLE1.bam~ ~override\TNTCLE1.bam~
+COPY ~Varshoon\BAM\TNTCLE2.bam~ ~override\TNTCLE2.bam~
+
+////////////////////////Some Skills
+
+COPY_EXISTING ~SPWI720.spl~ ~override/Vx251.spl~
+SAY NAME1 @1
+SAY NAME2 @1
+SAY DESC @1
+WRITE_SHORT 0x1C 4 
+WRITE_LONG 0x34 1 
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam" 
+WRITE_EVALUATED_ASCII 0x3A "%bam%" 
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4 
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY_EXISTING ~SPPR301.spl~ ~override/Vx252.spl~
+SAY NAME1 @2
+SAY NAME2 @2
+SAY DESC @2
+WRITE_SHORT 0x1C 4 
+WRITE_LONG 0x34 1 
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam" 
+WRITE_EVALUATED_ASCII 0x3A "%bam%" 
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4 
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY ~Varshoon/VxALH.spl~ ~Override/VxALH.spl~
+SAY NAME1 @3
+SAY NAME2 @3
+
+
+////////////////////////////////////
+//////////////// PSIONIC FORCER KIT
+////////////////////////////////////
+
+COPY ~Varshoon\2da\VxKit.2da~ ~override~
+COPY ~Varshoon\2da\LUVxKit.2da~ ~override~
+
+INCLUDE ~Varshoon/fl#add_kit_ee.tpa~
+ADD_KIT ~VxKit~
+~VxKit 2 0 0 0 0 0 0 0~ 
+~VxKit 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 2 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0~
+~VxKit 0 0 0 0 0 0~ 
+~VxKit 0 0 0 0 0 0~ 
+~VxKit 0 0 0 0 0 0~ 
+~VxKit 0 0 0 0 0 0~ 
+~VxKit 0 0 1 0 0 1 0 0 1~ 
+~VxKit 0 0 0 0 0 0~ 
+~override\VxKit.2da~
+~~
+~0x00000001 2~
+~VxKit~
+~PLAT04 * HELM07 BAG20 RING07 RING31 * BOOT01 AMUL20 BRAC09 BELT04 SW1H31 CLCK07 SHLD24 BAG02 BAG04 * * * *~ 
+SAY @4 
+SAY @4 
+SAY @5
+
+LAF fl#add_kit_ee
+  STR_VAR
+    kit_name = VxKit
+    clswpbon = ~1 0 2~
+	hpclass = ~HPWAR~
+	clsrcreq = ~0 0 0 0 0 0 0~
+    numwslot = 4
+END
+
+COPY ~Varshoon\Kit\VxFI.spl~ ~override~
+SAY NAME1 @6
+SAY NAME2 @6
+WRITE_ASCII 0x76 "SPPR209B" // change icon for Know Alignment
+WRITE_LONG 0xee 1 // save vs spell
+WRITE_LONG 0xf2 "-2" // at -2
+WRITE_LONG 0x11e 1 // save vs spell
+WRITE_LONG 0x122 "-2" // at -2
+WRITE_LONG 0x14e 1 // save vs spell
+WRITE_LONG 0x152 "-2" // at -2
+WRITE_LONG 0x17e 1 // save vs spell
+WRITE_LONG 0x182 "-2" // at -2
+
+COPY ~Varshoon\Kit\VxPG.spl~ ~override~
+SAY NAME1 @7
+SAY NAME2 @7
+
+COPY ~Varshoon\Kit\VxMD.spl~ ~override~
+SAY NAME1 @8
+SAY NAME2 @8
+WRITE_ASCII 0x76 "SPPR405B" // change icon for Mental Domination
+
+COPY ~Varshoon\Kit\VxMS.spl~ ~override~
+SAY NAME1 @9
+SAY NAME2 @9
+SAY 0x50 @35 // New description from the KIT
+WRITE_ASCII 0x76 "SPWI715B" // change icon for Power Word, Stun
+WRITE_LONG 0xee 1 // save vs spell
+WRITE_LONG 0xf2 "-4" // at -4
+
+COPY ~Varshoon\Kit\VxPS.spl~ ~override~
+SAY NAME1 @10
+SAY NAME2 @10
+SAY 0x50 @36 // New description from the KIT
+WRITE_ASCII 0x76 "SPPR718B" // change icon for Symbol, Stun
+
+COPY ~Varshoon\Kit\VxPSH.spl~ ~override~
+SAY NAME1 @11
+SAY NAME2 @11
+WRITE_ASCII 0x76 "SPWI413B" // change icon for Otiluke's Resilient Sphere
+WRITE_BYTE 0x7e 5 // target caster
+LPF ALTER_EFFECT INT_VAR match_opcode = 146 STR_VAR resource = "VxPSHA" END // create sub spell
+
+COPY_EXISTING ~SPWI413a.spl~ ~override/VxPSHA.spl~ // to avoid incompatibilities with spell mods
+WRITE_SHORT 0x1c 4 // innate
+WRITE_SHORT 0x34 1 // level 1
+
+COPY ~Varshoon\Kit\Passive~ ~override~
+
+COPY_EXISTING ~SPWI920.spl~ ~override/VxVARHL1.spl~
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY_EXISTING ~SPWI925.spl~ ~override/VxVARHL2.spl~
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY_EXISTING ~SPWI909.spl~ ~override/VxVARHL3.spl~
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY_EXISTING ~SPPR709.spl~ ~override/VxVARHL4.spl~
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+////////////////////////////////////////
+/////////RACE///////////////////////////
+////////////////////////////////////////
+
+ACTION_IF GAME_IS "bg2ee eet" BEGIN
+ OUTER_SET spec_lcase = RESOLVE_STR_REF(~mind flayer~)
+ OUTER_SET spec_ucase = RESOLVE_STR_REF(~Mind Flayer~)
+ APPEND ~racetext.2da~ ~MIND_FLAYER   124        %spec_lcase%       -1         %spec_ucase%          -1~ UNLESS ~MIND_FLAYER~
+END 
+
+
+////////////////////////////////////
+//////////////// VARSHOON
+////////////////////////////////////
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon/Portraits~ ~override~
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon/EEPortraits~ ~override~
+END
+
+
+COPY ~Varshoon\CRE\VxVar01.cre~ ~override~
+SAY NAME1 @12
+SAY NAME2 @12
+SAY BIO @13
+  SAY BATTLE_CRY1 ~~ [MINDF01]
+  SAY BATTLE_CRY2 ~~ [MINDF02]
+  SAY ATTACK1 ~~ [MINDF03]
+  SAY DAMAGE ~~ [MINDF06]
+  SAY DYING ~~ [MINDF07]
+  SAY SELECT_COMMON1 ~~ [MINDF01]
+  SAY LEADER ~~ [MINDF02]
+  SAY SELECT_ACTION1 ~~ [MINDF02]
+  SAY TARGET_IMMUNE ~~ [MINDF01]
+  SAY EXISTANCE5 @13
+
+COPY ~Varshoon\CRE\VxVar25.cre~ ~override~
+SAY NAME1 @12
+SAY NAME2 @12
+SAY BIO @13
+  SAY BATTLE_CRY1 ~~ [MINDF01]
+  SAY BATTLE_CRY2 ~~ [MINDF02]
+  SAY ATTACK1 ~~ [MINDF03]
+  SAY DAMAGE ~~ [MINDF06]
+  SAY DYING ~~ [MINDF07]
+  SAY SELECT_COMMON1 ~~ [MINDF01]
+  SAY LEADER ~~ [MINDF02]
+  SAY SELECT_ACTION1 ~~ [MINDF02]
+  SAY TARGET_IMMUNE ~~ [MINDF01]
+  SAY EXISTANCE5 @13
+
+APPEND ~pdialog.2da~
+~Varshoon VxVarP VxVarJ VxVarD VxVar25P VxVar25J VxVar25D VxVar25~ 
+UNLESS ~Varshoon~
+
+APPEND ~interdia.2da~
+
+~Varshoon VxVarB VxVar25B~
+
+COMPILE ~Varshoon\DIALOGUES\VxVar.d~
+COMPILE ~Varshoon\DIALOGUES\VxVarB.d~
+COMPILE ~Varshoon\DIALOGUES\VxGit.d~
+COMPILE ~Varshoon\SCRIPTS\VxGit.baf~
+COMPILE EVALUATE_BUFFER ~Varshoon\SCRIPTS\VxVar.baf~
+COMPILE ~Varshoon\SCRIPTS\VxCutMe.baf~
+
+COMPILE ~Varshoon\DIALOGUES\VxVarJ.d~
+
+COMPILE ~Varshoon\DIALOGUES\VxVar25B.d~
+COMPILE ~Varshoon\DIALOGUES\VxVar25.d~
+COMPILE ~Varshoon\SCRIPTS\VxVar25.baf~
+COMPILE ~Varshoon/DIALOGUES/VXVAR25J.d~
+
+/* ------------- *
+* Fate Spirit *
+* ------------- */
+ACTION_IF GAME_IS "eet" BEGIN
+INCLUDE ~EET/other/EET_functions.tph~ // functions from EET mod
+LAF ~EET_NPC_TRANSITION~
+INT_VAR
+type = 2 // NPC is summon-able if met before
+default_ToB = 1
+ clean_ToB = 1
+STR_VAR
+dv = "VxVar" // death variable of your NPC
+override_SoA = "VxVar" // override script of your NPC (SoA)
+override_ToB = "VxVar25" // override script of your NPC (ToB)
+cre_ToB = "vxvar25"
+dialog_ToB = "VXVAR25" // joining dialogue for ToB
+traFile = EVAL "Varshoon/Languages/%LANGUAGE%/FateSpirit.tra"
+string = "@0"
+stringPosDV = "Viconia" 
+clean_ToB_DV = "VxVar"
+END
+END ELSE BEGIN
+COMPILE ~Varshoon/DIALOGUES/FateSpirit.d~ USING ~Varshoon/Languages/%LANGUAGE%/FateSpirit.tra~
+END
+
+EXTEND_TOP   ~AR0516.bcs~ ~Varshoon\SCRIPTS\AR0516.baf~
+EXTEND_TOP   ~AR0711.bcs~ ~Varshoon\SCRIPTS\AR0711.baf~
+EXTEND_TOP   ~AR6200.bcs~ ~Varshoon\SCRIPTS\AR6200.baf~
+
+COPY ~Varshoon\ITM\VxW1.itm~ ~override~
+SAY NAME1 @14
+SAY NAME2 @14
+SAY DESC @15
+LPF CLONE_EFFECT INT_VAR match_opcode = 40 opcode = 142 parameter2 = 41 END // missing slow icon
+LPF CLONE_EFFECT INT_VAR match_opcode = 24 opcode = 142 parameter2 = 36 END // missing panic icon
+
+
+COPY ~Varshoon\ITM\VxW2.itm~ ~override~
+SAY NAME1 @16
+SAY NAME2 @16
+SAY DESC @17
+LPF ALTER_EFFECT INT_VAR match_opcode = 142 match_parameter2 = 89 parameter2 = 86 END // Typo
+LPF CLONE_EFFECT INT_VAR match_opcode = 24 opcode = 142 parameter2 = 36 END // missing panic icon
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\ITM\VxW3.itm~ ~override~
+    SAY NAME1 @18
+    SAY NAME2 @18
+    SAY DESC @19
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\EEITM\VxW3.itm~ ~override~
+    SAY NAME1 @18
+    SAY NAME2 @18
+    SAY DESC @19
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\ITM\VxW4.itm~ ~override~
+    SAY NAME1 @20
+    SAY NAME2 @20
+    SAY DESC @21
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\EEITM\VxW4.itm~ ~override~
+    SAY NAME1 @20
+    SAY NAME2 @20
+    SAY DESC @21
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\ITM\VxARM.itm~ ~override~
+    SAY NAME1 @22
+    SAY NAME2 @22
+    SAY DESC @23
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\EEITM\VxARM.itm~ ~override~
+    SAY NAME1 @22
+    SAY NAME2 @22
+    SAY DESC @23
+END
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\ITM\VxHEL.itm~ ~override~
+    SAY NAME1 @24
+    SAY NAME2 @24
+    SAY DESC @25
+    LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 142 parameter2 = 87 target = 1 timing = 2 END // missing regeneration icon
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+    COPY ~Varshoon\EEITM\VxHEL.itm~ ~override~
+    SAY NAME1 @24
+    SAY NAME2 @24
+    SAY DESC @25
+END
+
+
+COPY ~Varshoon\ITM\VxGit.itm~ ~override~
+SAY NAME1 @26
+SAY NAME2 @26
+SAY DESC @27
+
+ACTION_IF NOT FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+COPY ~Varshoon\ITM\VxGift.itm~ ~override~ // modified item to work like other protection against sleep and berserk (ie. Greenstone Amulet) 
+SAY NAME1 @28
+SAY NAME2 @28
+SAY DESC @29
+LPF DELETE_EFFECT INT_VAR match_opcode = 2 END // delete cure sleep
+LPF DELETE_EFFECT INT_VAR match_opcode = 4 END // delete cure berserk
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 101 parameter2 = 39 target = 1 timing = 2 END // immunity to sleep opcode
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 169 parameter2 = 14 target = 1 timing = 2 END // prevent portrait icon: sleep
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 101 parameter2 = 217 target = 1 timing = 2 END // immunity to power word sleep opcode
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 101 parameter2 = 3 target = 1 timing = 2 END // immunity to berserk opcode
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 169 parameter2 = 4 target = 1 timing = 2 END // prevent portrait icon: berserk
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 timing = 2 STR_VAR resource = "spwi116" END // protect against sleep
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 timing = 2 STR_VAR resource = "spwi220" END // protect against power word sleep
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 142 parameter2 = 52 target = 1 timing = 2 END // missing icon ; add mind shield
+PATCH_IF ((MOD_IS_INSTALLED ITEM_REV.tp2 0) OR (MOD_IS_INSTALLED SPELL_REV.tp2 0)) BEGIN
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 timing = 2 STR_VAR resource = "DVSLEEP" END // protect against sleep
+LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 206 target = 1 timing = 2 STR_VAR resource = "WAND08" END // protect against sleep
+END
+PATCH_IF MOD_IS_INSTALLED 1PP.tp2 208 BEGIN
+  WRITE_ASCII 0x22 ~JB~ #2		   // 1pp circlet band icon (JB)
+  WRITE_ASCII 0x44 ~GAMUL02~ #8    // amulet ground icon
+  LPF ADD_ITEM_EQEFFECT INT_VAR opcode = 7 parameter1 = 45 parameter2 = 52 target = 1 timing = 2 END
+END
+END
+
+ACTION_IF FILE_EXISTS_IN_GAME ~neera10.cre~ THEN BEGIN
+COPY ~Varshoon\EEITM\VxGift.itm~ ~override~ // modified item to work like other protection against sleep and berserk (ie. Greenstone Amulet) 
+SAY NAME1 @28
+SAY NAME2 @28
+SAY DESC @29
+END
+
+//COPY ~Varshoon\CRE\kgenie1.cre~ ~override~
+//SAY NAME1 @30
+//SAY NAME2 @30
+
+COPY_EXISTING ~kgenie1.cre~ ~override~
+ WRITE_EVALUATED_ASCII DEATHVAR ~kgenie1~ #32
+
+COPY ~Varshoon\CRE\VxGit.cre~ ~override~
+SAY NAME1 @31
+SAY NAME2 @31
+
+//////////////////EPILOGUE
+
+COPY ~Varshoon/VxVarEp.2da~ ~override/VxVarEp.2da~
+
+        REPLACE_TEXTUALLY ~PORTRAIT~ ~VxV2G~ 
+
+        REPLACE 99999 @32
+
+//Varshoon BLANK SONG
+
+COPY_EXISTING ~songlist.2da~ ~override~
+REPLACE_TEXTUALLY
+~0 No_music ****~
+~0 VARBLANK VARBLANK.MUS~
+
+COPY ~Varshoon\MUSIC\VarBlank.mus~ ~music/VarBlank.mus~
+
+COPY ~Varshoon\MUSIC\VxVar.ogg~ ~override/VxVar.ogg~
+COPY ~Varshoon\MUSIC\oggdec.exe~ ~override/oggdec.exe~
+
+COPY ~Varshoon\MUSIC\VarIA.bat~ ~VarIA.bat~
+COPY ~Varshoon\MUSIC\VarUA.bat~ ~VarUA.bat~
+
+AT_INTERACTIVE_EXIT ~VarIA.bat~
+AT_UNINSTALL ~VarUA.bat~
+
+BEGIN @33
+REQUIRE_COMPONENT ~Varshoon/Setup-Varshoon.tp2~ ~0~ @34
+LABEL L#-VARSHOON-BAM
+
+COPY ~Varshoon\BAM~ ~override~

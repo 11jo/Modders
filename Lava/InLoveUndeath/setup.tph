@@ -1,0 +1,653 @@
+
+//////////////////////////////////////////////////////////////////////////////////
+////WILSON DOESN'T HAVE HIS BANTER FILE - THAT MAKES HIM SAD! LET'S CHANGE THAT///
+//////////////////////////////////////////////////////////////////////////////////
+
+
+ACTION_IF FILE_EXISTS_IN_GAME ~wilson.dlg~ THEN BEGIN
+ PRINT @35
+    APPEND ~interdia.2da~ ~WILSON BWILSON BWILSO25~
+    UNLESS ~WILSON~
+   ACTION_IF NOT (FILE_EXISTS_IN_GAME ~BWILSON.dlg~) THEN BEGIN
+   COMPILE ~%MOD_FOLDER%/dialogue/BWILSONFix.d~
+  END
+   ACTION_IF NOT (FILE_EXISTS_IN_GAME ~BWILSO25.dlg~) THEN BEGIN
+   COMPILE ~%MOD_FOLDER%/dialogue/BWILSO25Fix.d~
+  END
+END
+
+//////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
+// Adding CD_STATE_NOTVALID
+
+APPEND ~STATE.IDS~ ~0x80101FEF CD_STATE_NOTVALID~ UNLESS ~CD_STATE_NOTVALID~  
+
+// AUDIO
+
+LAF HANDLE_AUDIO END
+
+//Portraits
+
+COPY ~InLoveUndeath/portraits~     override
+
+//Areas
+
+COPY ~InLoveUndeath/areas~     override
+
+COPY_EXISTING ar1106.are override // buried book
+ LPF fj_are_structure INT_VAR
+    fj_type = 8 //nonvisible
+    fj_box_left = 505
+    fj_box_top = 716
+    fj_box_right = 526
+    fj_box_bottom = 728
+    fj_loc_x = 533
+    fj_loc_y = 742
+    fj_flags = 0
+     fj_vertex_0 = 505 + (724 << 16)
+     fj_vertex_1 = 516 + (720 << 16)
+     fj_vertex_2 = 525 + (716 << 16)
+     fj_vertex_3 = 526 + (727 << 16)
+     fj_vertex_4 = 517 + (728 << 16)
+   STR_VAR
+    fj_structure_type = container
+    fj_name = l#xzeb
+    fj_trap_script = ~l#xzeb~
+ END
+ 
+ COPY_EXISTING ~AR0206.are~ ~override~
+      WRITE_ASCII 0x94 ~AR0206~ #8 
+
+//libraries
+
+INCLUDE ~InLoveUndeath/lib/kit.tph~
+INCLUDE ~InLoveUndeath/lib/NewAnimation-Chimera.tph~
+INCLUDE ~InLoveUndeath/lib/NewAnimation-Ankheg.tph~
+COPY ~InLoveUndeath/animations/audio~            override
+COPY ~InLoveUndeath/animations/audio-bandit~     override
+
+INCLUDE ~InLoveUndeath/lib/music.tph~
+
+//RACE
+
+LAF ADD_IDS_ENTRY INT_VAR minValue = 1 maxValue = 255 preferredValue = 1 STR_VAR idsFile = "race.ids" identifier = "REVENANT" RET value END
+
+OUTER_SET race_lcase = RESOLVE_STR_REF(@36)
+OUTER_SET race_ucase = RESOLVE_STR_REF(@37)
+APPEND ~racetext.2da~ ~REVENANT   %value%        %race_lcase%       -1         %race_ucase%          -1~ UNLESS ~REVENANT~
+
+//Creatures
+
+COPY ~InLoveUndeath/creatures/L#XZESTA.cre~ ~override~
+SAY NAME1 @38
+SAY NAME2 @38
+
+COPY ~InLoveUndeath/creatures/L#XZEAGE.cre~ ~override~
+SAY NAME1 @39
+SAY NAME2 @39
+
+COPY ~InLoveUndeath/creatures/L#XZECHI.cre~ ~override~
+SAY NAME1 @40
+SAY NAME2 @40
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~L#_CHIMERA_INFERNAL~))
+
+COPY ~InLoveUndeath/creatures/L#XZEANS.cre~ ~override~
+SAY NAME1 @41
+SAY NAME2 @41
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~L#_ANKHEG_ZOMBIE~))
+
+COPY ~InLoveUndeath/creatures/L#XZEANK.cre~ ~override~
+SAY NAME1 @42
+SAY NAME2 @42
+WRITE_LONG 0x28 (IDS_OF_SYMBOL (~animate~ ~L#_ANKHEG_ZOMBIE~))
+
+COPY ~InLoveUndeath/creatures/L#XZEBD1.cre~ ~override~
+SAY NAME1 @43
+SAY NAME2 @43
+
+COPY ~InLoveUndeath/creatures/L#XZEBD2.cre~ ~override~
+SAY NAME1 @44
+SAY NAME2 @44
+
+COPY ~InLoveUndeath/creatures/L#XZEBD3.cre~ ~override~
+SAY NAME1 @45
+SAY NAME2 @45
+
+COPY ~InLoveUndeath/creatures/L#XZECLE.cre~ ~override~
+SAY NAME1 @46
+SAY NAME2 @46
+
+COPY ~InLoveUndeath/creatures/L#XZEOHM.cre~ ~override~
+SAY NAME1 @47
+SAY NAME2 @47
+
+COPY ~InLoveUndeath/creatures/L#XZEDWA.cre~ ~override~
+SAY NAME1 @48
+SAY NAME2 @48
+
+COPY ~InLoveUndeath/creatures/L#XZEGOL.cre~ ~override~
+SAY NAME1 @49
+SAY NAME2 @49
+
+COPY ~InLoveUndeath/creatures/L#XZEOH2.cre~ ~override~
+SAY NAME1 @50
+SAY NAME2 @50
+
+COPY ~InLoveUndeath/creatures/L#XZECUR.cre~ ~override~
+SAY NAME1 @51
+SAY NAME2 @51
+
+COPY ~InLoveUndeath/creatures/L#XZEWRA.cre~ ~override~
+SAY NAME1 @52
+SAY NAME2 @52
+
+COPY ~InLoveUndeath/creatures/L#XZEWR2.cre~ ~override~
+SAY NAME1 @53
+SAY NAME2 @53
+
+COPY ~InLoveUndeath/creatures/L#XZE.cre~ ~override~
+SAY NAME1 @54
+SAY NAME2 @55
+SAY BIO @56
+WRITE_BYTE 0x272 %value%
+WRITE_SHORT 0x246 (IDS_OF_SYMBOL (~kit~ ~L#XZEPL~))
+SAY MORALE @57
+SAY HAPPY @58
+SAY UNHAPPY_ANNOYED @59
+SAY UNHAPPY_SERIOUS @59
+SAY UNHAPPY_BREAKING_POINT @60
+SAY LEADER @61
+SAY TIRED @62
+SAY BORED @63
+SAY BATTLE_CRY1 @64
+SAY BATTLE_CRY2 @65
+SAY BATTLE_CRY3 @66
+SAY BATTLE_CRY4 @64
+SAY BATTLE_CRY5 @65
+SAY DAMAGE @67
+SAY DYING @68
+SAY HURT @69
+SAY AREA_FOREST @70
+SAY AREA_CITY @71 
+SAY AREA_DUNGEON @72
+SAY AREA_DAY @73
+SAY AREA_NIGHT @74
+SAY SELECT_COMMON1 @75
+SAY SELECT_COMMON2 @76
+SAY SELECT_COMMON3 @77
+SAY SELECT_COMMON4 @78
+SAY SELECT_COMMON5 @79
+SAY SELECT_COMMON6 @80
+SAY SELECT_ACTION1 @81  
+SAY SELECT_ACTION2 @82
+SAY SELECT_ACTION3 @83
+SAY SELECT_ACTION4 @84  
+SAY SELECT_ACTION5 @85
+SAY SELECT_ACTION6 @86
+SAY SELECT_ACTION7 @87
+SAY CRITICAL_HIT @88
+SAY CRITICAL_MISS @89
+SAY TARGET_IMMUNE @90
+SAY INVENTORY_FULL @91
+SAY SELECT_RARE1 @92
+SAY SELECT_RARE2 @92
+SAY SPELL_DISRUPTED @93
+SAY SET_A_TRAP ~~ []
+SAY HIDDEN_IN_SHADOWS ~~ []
+SAY PICKED_POCKET ~~ []
+SAY REACT_TO_DIE_GENERAL @95
+
+COPY ~InLoveUndeath/creatures/L#XZE25.cre~ ~override~
+SAY NAME1 @54
+SAY NAME2 @55
+SAY BIO @56
+WRITE_BYTE 0x272 %value%
+WRITE_SHORT 0x246 (IDS_OF_SYMBOL (~kit~ ~L#XZEPL~))
+SAY MORALE @57
+SAY HAPPY @58
+SAY UNHAPPY_ANNOYED @59
+SAY UNHAPPY_SERIOUS @59
+SAY UNHAPPY_BREAKING_POINT @60
+SAY LEADER @61
+SAY TIRED @62
+SAY BORED @63
+SAY BATTLE_CRY1 @64
+SAY BATTLE_CRY2 @65
+SAY BATTLE_CRY3 @66
+SAY BATTLE_CRY4 @64
+SAY BATTLE_CRY5 @65
+SAY DAMAGE @67
+SAY DYING @68
+SAY HURT @69
+SAY AREA_FOREST @70
+SAY AREA_CITY @71 
+SAY AREA_DUNGEON @72
+SAY AREA_DAY @73
+SAY AREA_NIGHT @74
+SAY SELECT_COMMON1 @75
+SAY SELECT_COMMON2 @76
+SAY SELECT_COMMON3 @77
+SAY SELECT_COMMON4 @78
+SAY SELECT_COMMON5 @79
+SAY SELECT_COMMON6 @80
+SAY SELECT_ACTION1 @81  
+SAY SELECT_ACTION2 @82
+SAY SELECT_ACTION3 @83
+SAY SELECT_ACTION4 @84  
+SAY SELECT_ACTION5 @85
+SAY SELECT_ACTION6 @86
+SAY SELECT_ACTION7 @87
+SAY CRITICAL_HIT @88
+SAY CRITICAL_MISS @89
+SAY TARGET_IMMUNE @90
+SAY INVENTORY_FULL @91
+SAY SELECT_RARE1 @92
+SAY SELECT_RARE2 @92
+SAY SPELL_DISRUPTED @93
+SAY SET_A_TRAP ~~ []
+SAY HIDDEN_IN_SHADOWS ~~ []
+SAY PICKED_POCKET ~~ []
+SAY REACT_TO_DIE_GENERAL @95
+
+APPEND ~pdialog.2da~
+~L#XZE L#XZEP L#XZEJ L#XZED L#XZE25P L#XZE25J L#XZE25D L#XZE25~
+UNLESS ~L#XZE~
+
+APPEND ~interdia.2da~
+~L#XZE L#XZEB L#XZE25B~
+UNLESS ~L#XZE~
+
+//Dialogue
+
+COMPILE ~InLoveUndeath/dialogue/CreateFiles.d~
+COMPILE ~InLoveUndeath/dialogue/cromwell.d~
+COMPILE ~InLoveUndeath/dialogue/Banters.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZESTA.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEAGE.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZECLE.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEOHM.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEBD.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEDWA.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEOH2.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZECUR.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZE.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEP.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZEJ.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZE25.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZE25P.d~
+COMPILE ~InLoveUndeath/dialogue/L#XZE25J.d~
+//COMPILE ~InLoveUndeath/dialogue/FateSpirit.d~
+
+
+LAF ADD_IDS_ENTRY INT_VAR minValue = 1 maxValue = 255 preferredValue = 1 STR_VAR idsFile = "race.ids" identifier = "HALF-CURST" RET value END
+
+OUTER_SET race_lcase = RESOLVE_STR_REF(@96)
+OUTER_SET race_ucase = RESOLVE_STR_REF(@97)
+APPEND ~racetext.2da~ ~HALF-CURST   %value%        %race_lcase%       -1         %race_ucase%          -1~ UNLESS ~HALF-CURST~
+
+COMPILE ~InLoveUndeath/dialogue/HCurstInter.d~ EVAL
+
+//Scripts
+
+COMPILE ~InLoveUndeath/scripts/L#XZE.baf~    EVAL
+COMPILE ~InLoveUndeath/scripts/L#XZED.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZE1.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZE2.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECUR.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECSF.baf~ EVAL
+COMPILE ~InLoveUndeath/scripts/L#XZECSB.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECST.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECSC.baf~ EVAL
+COMPILE ~InLoveUndeath/scripts/L#XZECSO.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEOH2.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECSR.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEOHM.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEDWA.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECLE.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZESTA.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEBD1.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEANK.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEANS.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZECHI.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEWC1.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZEWC2.baf~
+COMPILE ~InLoveUndeath/scripts/L#XZE25.baf~  EVAL
+COMPILE ~InLoveUndeath/scripts/L#XZE25D.baf~
+
+EXTEND_TOP   ~AR0206.bcs~    ~InLoveUndeath/scripts/AR0206.baf~
+EXTEND_TOP   ~AR1401.bcs~    ~InLoveUndeath/scripts/AR1401.baf~
+EXTEND_TOP   ~AR0334.bcs~    ~InLoveUndeath/scripts/AR0334.baf~
+EXTEND_TOP   ~AR0900.bcs~    ~InLoveUndeath/scripts/AR0900.baf~
+EXTEND_TOP   ~AR1000.bcs~    ~InLoveUndeath/scripts/AR1000.baf~
+EXTEND_TOP   ~AR1106.bcs~    ~InLoveUndeath/scripts/AR1106.baf~
+EXTEND_TOP   ~AR0802.bcs~    ~InLoveUndeath/scripts/AR0802.baf~
+EXTEND_TOP   ~AR6200.bcs~    ~InLoveUndeath/scripts/AR6200.baf~
+EXTEND_TOP   ~BALDUR.bcs~    ~InLoveUndeath/scripts/KickDead.baf~
+EXTEND_TOP   ~BALDUR.bcs~    ~InLoveUndeath/scripts/JournalEntries.baf~
+EXTEND_TOP   ~AR4500.bcs~    ~InLoveUndeath/scripts/AR4500.baf~ EVAL
+
+EXTEND_BOTTOM   ~OHDGORGE.bcs~  ~InLoveUndeath/scripts/OHDGORGE.baf~
+EXTEND_BOTTOM   ~cut218g.bcs~   ~InLoveUndeath/scripts/L#XZEWC3.baf~
+
+//SUMMON TOB
+
+ACTION_IF GAME_IS ~eet~ BEGIN
+INCLUDE ~EET/other/EET_functions.tph~
+LAF ~EET_NPC_TRANSITION~
+INT_VAR
+type = 2
+default_ToB = 1
+clean_ToB = 1
+STR_VAR
+dv = "l#dva"
+override_SoA = "L#xze"
+override_ToB = "L#xze25"
+dialog_ToB = "L#xze25"
+cre_ToB = "L#xze25"
+traFile = EVAL ~InLoveUndeath/translations/%LANGUAGE%/FateSpirit.tra~
+string = "@0"
+stringPosDV = "Xzar"
+//clean_ToB_DV = "Khalid"
+END
+END ELSE BEGIN
+COMPILE ~InLoveUndeath/dialogue/FateSpirit.d~ USING ~InLoveUndeath/translations/%LANGUAGE%/FateSpirit.tra~
+END
+
+//Items
+
+COPY ~InLoveUndeath/Items/L#XZEW1.itm~ ~override~
+SAY NAME1 @98
+SAY NAME2 @99
+SAY DESC @100
+
+COPY ~InLoveUndeath/Items/L#XZEW2.itm~ ~override~
+SAY NAME1 @98
+SAY NAME2 @101
+SAY DESC @102
+
+COPY ~InLoveUndeath/Items/L#XZEW3.itm~ ~override~
+SAY NAME1 @98
+SAY NAME2 @103
+SAY DESC @104
+
+COPY ~InLoveUndeath/Items/L#XZEW4.itm~ ~override~
+SAY NAME1 @98
+SAY NAME2 @105
+SAY DESC @106
+
+COPY ~InLoveUndeath/Items/L#XZERIN.itm~ ~override~
+LPF ALTER_EFFECT INT_VAR match_opcode = 180 parameter1 = RESOLVE_STR_REF (@107) END
+SAY NAME1 @108
+SAY NAME2 @109
+SAY DESC @110
+
+COPY ~InLoveUndeath/Items/L#XZELET.itm~ ~override~
+SAY NAME1 @111
+SAY NAME2 @111
+SAY DESC @112
+
+COPY ~InLoveUndeath/items/L#XZEANA.itm~ ~override~
+SAY NAME1 @113
+SAY NAME2 @114
+SAY DESC @115
+
+COPY ~InLoveUndeath/items/L#XZEAN1.itm~ ~override~
+SAY NAME1 @116
+SAY NAME2 @116
+SAY DESC @117
+
+COPY ~InLoveUndeath/items/L#XZEAN2.itm~ ~override~
+SAY NAME1 @118
+SAY NAME2 @118
+SAY DESC @119
+
+COPY ~InLoveUndeath/items/L#XZEGEM.itm~ ~override~
+SAY NAME1 @120
+SAY NAME2 @120
+SAY DESC @121
+
+COPY ~InLoveUndeath/Items/L#XZESX.itm~ ~override~
+SAY NAME1 @122
+SAY NAME2 @123
+SAY DESC @124
+
+COPY ~InLoveUndeath/Items/L#XZEBD1.itm~ ~override~
+SAY NAME1 @125
+SAY NAME2 @125
+SAY DESC @126
+
+COPY ~InLoveUndeath/Items/L#XZEBD2.itm~ ~override~
+SAY NAME1 @125
+SAY NAME2 @125
+SAY DESC @126
+
+COPY ~InLoveUndeath/Items/L#XZEBD3.itm~ ~override~
+SAY NAME1 @125
+SAY NAME2 @125
+SAY DESC @126
+
+COPY ~InLoveUndeath/Items/L#XZEPOE.itm~ ~override~
+SAY NAME1 @127
+SAY NAME2 @128
+SAY DESC @129
+
+COPY ~InLoveUndeath/Items/L#XZEBUC.itm~ ~override~
+SAY NAME1 @130
+SAY NAME2 @131
+SAY DESC @132
+
+COPY ~InLoveUndeath/Items/L#XZEDAG.itm~ ~override~
+SAY NAME1 @133
+SAY NAME2 @134
+SAY DESC @135
+
+COPY ~InLoveUndeath/Items/L#XZEDAR.itm~ ~override~
+SAY NAME1 @136
+SAY NAME2 @137
+SAY DESC @138
+
+COPY ~InLoveUndeath/Items/L#XZEFLA.itm~ ~override~
+SAY NAME1 @139
+SAY NAME2 @140
+SAY DESC @141
+
+COPY ~InLoveUndeath/Items/L#XZERI2.itm~ ~override~
+SAY NAME1 @108
+SAY NAME2 @142
+SAY DESC @143
+
+COPY ~InLoveUndeath/Items/L#XZEPRI.itm~ ~override~
+SAY NAME1 @144
+SAY NAME2 @145
+SAY DESC @146
+
+COPY ~InLoveUndeath/Items/L#XZEHEA.itm~ ~override~
+SAY NAME1 @147
+SAY NAME2 @147
+SAY DESC @148
+
+COPY ~InLoveUndeath/Items/L#XZEOHJ.itm~ ~override~
+SAY NAME1 @149
+SAY NAME2 @149
+SAY DESC @150
+
+COPY ~InLoveUndeath/Items/L#XZESK1.itm~ ~override~
+SAY NAME1 @151
+SAY NAME2 @151
+SAY DESC @152
+
+COPY ~InLoveUndeath/Items/L#XZESK2.itm~ ~override~
+SAY NAME1 @151
+SAY NAME2 @151
+SAY DESC @153
+
+COPY ~InLoveUndeath/Items/L#XZEFLO.itm~ ~override~
+SAY NAME1 @154
+SAY NAME2 @154
+SAY DESC @155
+
+COPY ~InLoveUndeath/Items/L#XZEJCU.itm~ ~override~
+SAY NAME1 @156
+SAY NAME2 @156
+SAY DESC @157
+
+COPY ~InLoveUndeath/Items/L#XZECHE.itm~ ~override~
+SAY NAME1 @158
+SAY NAME2 @159
+SAY DESC @160
+
+COPY ~InLoveUndeath/Items/L#XZECMS.itm~ ~override~
+SAY NAME1 @161
+SAY NAME2 @162
+SAY DESC @163
+
+COPY ~InLoveUndeath/Items/L#XZECRI.itm~ ~override~
+SAY NAME1 @164
+SAY NAME2 @164
+SAY DESC @165
+
+COPY ~InLoveUndeath/Items/L#XZECOM.itm~ ~override~
+SAY NAME1 @166
+SAY NAME2 @166
+SAY DESC @167
+
+COPY_EXISTING ~DRAGSHAD.cre~ ~override/DRAGSHAD.cre~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) THEN BEGIN
+		ADD_CRE_ITEM ~L#XZECOM~ #1 #0 #0 ~NONE~ ~inv~
+	END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY_EXISTING ~SHADRA01.cre~ ~override/SHADRA01.cre~
+	PATCH_IF (SOURCE_SIZE > 0x2d3) THEN BEGIN
+		ADD_CRE_ITEM ~L#XZECOM~ #1 #0 #0 ~NONE~ ~inv~
+	END
+BUT_ONLY_IF_IT_CHANGES
+
+COPY ~InLoveUndeath/Items/L#XZEPCC.itm~ ~override~
+LPF ALTER_EFFECT INT_VAR match_opcode = 180 parameter1 = RESOLVE_STR_REF (@168) END
+SAY NAME1 @164
+SAY NAME2 @164
+SAY DESC @169
+
+COPY ~InLoveUndeath/Items/L#XZEGEN.itm~ ~override~
+SAY NAME1 @170
+SAY NAME2 @171
+SAY DESC @172
+
+COPY ~InLoveUndeath/Items/L#XZETAR.itm~ ~override~
+SAY NAME1 @173
+SAY NAME2 @173
+SAY DESC @174
+
+//SPELLS
+
+COPY ~InLoveUndeath/spells/L#XZEFLA.spl~ ~override~
+SAY NAME1 ~~
+SAY UNIDENTIFIED_DESC ~~
+
+COPY ~InLoveUndeath/spells/L#XZEPR1.spl~ ~override~
+SAY NAME1 ~~
+SAY UNIDENTIFIED_DESC ~~
+
+COPY ~InLoveUndeath/spells/L#XZEPR2.spl~ ~override~
+SAY NAME1 ~~
+SAY UNIDENTIFIED_DESC ~~
+
+COPY ~InLoveUndeath/spells/L#XZEDEA.spl~ ~override~
+SAY NAME1 ~~
+SAY UNIDENTIFIED_DESC ~~
+
+COPY ~InLoveUndeath/spells/L#XZEPCC.spl~ ~override~
+SAY NAME1 ~~
+SAY UNIDENTIFIED_DESC ~~
+
+COPY ~InLoveUndeath/spells/L#XZEVIS.spl~ ~override~
+SAY NAME1 @175
+SAY UNIDENTIFIED_DESC @176
+
+COPY_EXISTING ~SPWI218.spl~ ~override/L#XZUP1.spl~
+SAY NAME1 @177
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+COPY_EXISTING ~SPPR608.spl~ ~override/L#XZUP2.spl~
+SAY NAME1 @178
+WRITE_SHORT 0x1C 4
+WRITE_LONG 0x34 1
+READ_LONG 0x64 "offset_abil"
+READ_SHORT 0x68 "num_abil"
+READ_ASCII ("%offset_abil%" + 0x04) "bam"
+WRITE_EVALUATED_ASCII 0x3A "%bam%"
+WHILE (0 < "%num_abil%")
+BEGIN
+WRITE_SHORT (("%offset_abil%" + 0x02) + (("%num_abil%" - 1) * 0x28)) 4
+SET "num_abil" = ("%num_abil%" - 1)
+END
+
+//Stores
+
+COPY ~InLoveUndeath/sto/L#XZECLE.sto~  ~override~
+  SAY 0xc @179
+  
+//Epilogues
+
+COPY ~InLoveUndeath/L#XzeEp.2da~ ~override/L#XzeEp1.2da~ // No romance, everyone gets it
+
+REPLACE_TEXTUALLY ~PORTRAIT~ ~L#XZE1L~
+
+REPLACE 99999 @180
+
+COPY ~InLoveUndeath/L#XzeEp.2da~ ~override/L#XzeEp2.2da~ // Romance succesful
+
+REPLACE_TEXTUALLY ~PORTRAIT~ ~L#XZE1L~
+
+REPLACE 99999 @181
+
+//world map
+
+// map icon index in mapicons.bam
+ACTION_IF GAME_IS ~bg2ee eet~ BEGIN
+  INCLUDE ~%MOD_FOLDER%/Worldmap/add_map_icons_ee.tpa~
+  LAF ADD_MAP_ICONS_EE STR_VAR path_to_icons = EVAL ~%MOD_FOLDER%/Worldmap/ee/icon.bam~ patch_to_pvrz = EVAL ~%MOD_FOLDER%/Worldmap/ee~ RET new_icon_index END
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY remapped_icons BEGIN 10 => ~%new_icon_index%~ END
+  STRING_SET 23084 @182 //Traveling Hours -> Hours
+  STRING_SET 5684 @183 //Destination Unreachable -> Unreachable
+END ELSE BEGIN //bg2, bgt
+  INCLUDE ~%MOD_FOLDER%/Worldmap/add_map_icons.tpa~
+  LAF ADD_MAP_ICONS STR_VAR path_to_icons = EVAL ~%MOD_FOLDER%/Worldmap/bg/icon.bam~ RET new_icon_index END
+  ACTION_DEFINE_ASSOCIATIVE_ARRAY remapped_icons BEGIN 10 => ~%new_icon_index%~ END
+END
+
+// patch WMP using TBL files
+INCLUDE ~%MOD_FOLDER%/Worldmap/add_worldmap_tbl.tpa~
+LAF ADD_WORLDMAP_TBL
+  INT_VAR
+  verbose = 0
+  inclSv = include_saves
+  add_x = wmp_xCoord_SoA
+  add_y = wmp_yCoord_SoA
+  patch_bp_files = 1
+  patch_mastarea = 1
+  STR_VAR
+  path_to_areas = EVAL ~%MOD_FOLDER%/Worldmap/areas_bg2.tbl~
+  path_to_areas_bp = EVAL ~%MOD_FOLDER%/Worldmap/areas.tbl~
+  path_to_links = EVAL ~%MOD_FOLDER%/Worldmap/links.tbl~
+  path_to_trans = EVAL ~%MOD_FOLDER%/Translations/%LANGUAGE%/worldmap.tra~
+  icons_table = remapped_icons
+END
+
+//JOURNALS 
+
+  ADD_JOURNAL @184 @185 @186 @187 @188 @189 @190 @191 @192 @193 @194 @195 @196 @197 @198 @199 @200 @201 @202 @203 @204 @205
+
+  USING ~InLoveUndeath\Translations\%LANGUAGE%\SETUP.TRA~
