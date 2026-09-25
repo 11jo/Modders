@@ -1,0 +1,57 @@
+BACKUP ~verrsza\backup~
+AUTHOR ~Lava Del'Vortel~
+README ~verrsza/readme.txt~
+
+VERSION ~v6.3~
+AUTO_TRA ~verrsza/translations/%s~
+
+ALWAYS
+  INCLUDE ~verrsza/library/eet.tph~
+  INCLUDE ~verrsza/library/functions.tph~
+END
+
+// Crossplatform var stuff blatantly stolen from cmorgan/gavin/bg1npc/isra!
+ALWAYS
+ACTION_IF GAME_IS ~eet~ THEN BEGIN
+  /*Tell the player it is using BG:EE stuff */
+  PRINT @1 /* BG:EE install detected */
+  INCLUDE  ~EET\other\cpmvars\eet_cpmvars.tpa~
+	END ELSE BEGIN
+		ACTION_IF GAME_IS ~bgee~ THEN BEGIN
+		/*Tell the player it is using BG:EE stuff */
+		PRINT @1 /* BG:EE install detected */
+		INCLUDE ~verrsza\library\liam_bgee_vars.tpa~
+		END ELSE BEGIN
+			ACTION_IF GAME_IS ~tutu~ THEN BEGIN
+			/* Tell the player it is using Tutu stuff */
+			PRINT @2 /* Tutu install detected. */
+			INCLUDE ~verrsza\library\g3_tutu_cpmvars.tpa~
+			END ELSE BEGIN
+				ACTION_IF GAME_IS ~bgt~ THEN BEGIN
+				/* Tell the player it is using BGT stuff */
+				PRINT @3 /* BGT install detected. */
+				INCLUDE ~verrsza\library\g3_bgt_cpmvars.tpa~
+				/* Tell the player it is not Tutu or BGT */
+				END ELSE BEGIN FAIL @4 /* Please install on BG:EE, Tutu or BGT. */
+			END
+		END
+	END
+  END
+END
+
+LANGUAGE ~English~
+         ~english~
+         ~verrsza/translations/english/verrsza.TRA~
+
+LANGUAGE ~Simplified Chinese (by MephistoSatanDevil)~
+         ~schinese~
+         ~verrsza/translations/schinese/verrsza.TRA~
+
+BEGIN @6 /* Verr'Sza - the rakshasa NPC for BG1EE */
+  REQUIRE_PREDICATE (GAME_IS ~bgee eet~) @7 /* This component must be installed on BG:EE. */
+  LABEL L#-VERRBGEE
+  
+INCLUDE ~verrsza/library/verr_bg1.tpa~ 
+ACTION_IF GAME_IS ~bgee~ AND GAME_INCLUDES ~sod~ THEN BEGIN
+INCLUDE ~verrsza/library/verr_sod.tpa~ 
+END

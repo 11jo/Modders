@@ -1,0 +1,433 @@
+//DYNAHEIR
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahDynaheir1","MYAREA",0)
+	Switch("L#SWalahDynaheir1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#SWalah",@111)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDynaheir1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Dynaheir",@112)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDynaheir1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Dynaheir",@113)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDynaheir1","MYAREA",-1)
+END
+
+//EDWIN
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahEdwin1","MYAREA",0)
+	Switch("L#SWalahEdwin1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@114)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Edwin",@115)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",20)
+	RESPONSE #20
+	DisplayStringHead("L#WALAH",@116)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",30)
+	RESPONSE #30
+	DisplayStringHead("Edwin",@117)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",40)
+	RESPONSE #40
+	DisplayStringHead("L#WALAH",@118)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",50)
+	RESPONSE #50
+	DisplayStringHead("L#WALAH",@119)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahEdwin1","MYAREA",-1)
+END
+
+//JAHEIRA
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahJaheira1","MYAREA",0)
+	Switch("L#SWalahJaheira1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@120)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahJaheira1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Jaheira",@121)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahJaheira1","MYAREA",-1)
+END
+
+// KHALID
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahKhalid1","MYAREA",0)
+	Switch("L#SWalahKhalid1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@122)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahKhalid1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Khalid",@123)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahKhalid1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Khalid",@124)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahKhalid1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("L#WALAH",@125)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahKhalid1","MYAREA",40)
+RESPONSE #40
+	DisplayStringHead("L#WALAH",@126)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahKhalid1","MYAREA",-1)
+END
+
+// MINSC
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahMinsc1","MYAREA",0)
+	Switch("L#SWalahMinsc1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Minsc",@127)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",1)
+RESPONSE #10
+	DisplayStringHead("L#WALAH",@128)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",10)
+RESPONSE #20
+	DisplayStringHead("Minsc",@129)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",20)
+RESPONSE #30
+	DisplayStringHead("L#WALAH",@130)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",30)
+RESPONSE #40
+	DisplayStringHead("Minsc",@131)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",40)
+RESPONSE #50
+	DisplayStringHead("Minsc",@132)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMinsc1","MYAREA",-1)
+END
+
+// SAFANA
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahSafana1","MYAREA",0)
+	Switch("L#SWalahSafana1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Safana",@133)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahSafana1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("L#WALAH",@134)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahSafana1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Safana",@135)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahSafana1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("L#WALAH",@136)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahSafana1","MYAREA",-1)
+END
+
+// VICONIA
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahViconia1","MYAREA",0)
+	Switch("L#SWalahViconia1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Viconia",@137)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahViconia1","MYAREA",10)
+RESPONSE #10
+  DisplayStringHead("L#WALAH",@138)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahViconia1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Viconia",@139)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahViconia1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("Viconia",@140)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahViconia1","MYAREA",-1)
+END
+
+// BAELOTH
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahBaeloth1","MYAREA",0)
+	Switch("L#SWalahBaeloth1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@141)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahBaeloth1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Baeloth",@142)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahBaeloth1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Baeloth",@143)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahBaeloth1","MYAREA",-1)
+END
+
+// DORN
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahDorn1","MYAREA",0)
+	Switch("L#SWalahDorn1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Dorn",@144)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDorn1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Dorn",@145)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDorn1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("L#WALAH",@146)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDorn1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("L#WALAH",@147)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahDorn1","MYAREA",-1)
+END
+
+// NEERA
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahNeera1","MYAREA",0)
+	Switch("L#SWalahNeera1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Neera",@148)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("L#WALAH",@149)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Neera",@150)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("Neera",@151)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",40)
+RESPONSE #40
+	DisplayStringHead("Neera",@152)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",50)
+RESPONSE #50
+	DisplayStringHead("L#Walah",@153)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",60)
+RESPONSE #60
+	DisplayStringHead("Neera",@154)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahNeera1","MYAREA",-1)
+END
+
+// RASAAD
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahRasaad1","MYAREA",0)
+	Switch("L#SWalahRasaad1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@155)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahRasaad1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Rasaad",@156)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahRasaad1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("Rasaad",@157)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahRasaad1","MYAREA",-1)
+END
+
+// CORWIN
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahCorwin1","MYAREA",0)
+	Switch("L#SWalahCorwin1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@158)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Corwin",@159)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("L#WALAH",@160)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("Corwin",@161)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",40)
+RESPONSE #40
+	DisplayStringHead("L#WALAH",@162)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",50)
+RESPONSE #50
+	DisplayStringHead("Corwin",@163)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",60)
+RESPONSE #60
+	DisplayStringHead("L#WALAH",@164)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahCorwin1","MYAREA",-1)
+END
+
+// M'KHIIN
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahMkhiin1","MYAREA",0)
+	Switch("L#SWalahMkhiin1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@165)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMkhiin1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Mkhiin",@166)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMkhiin1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("L#WALAH",@167)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMkhiin1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("Mkhiin",@168)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahMkhiin1","MYAREA",-1)
+END
+
+// VOGHILN
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#2BristleVoghiln1","MYAREA",0)
+	Switch("L#2BristleVoghiln1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("Voghiln",@169)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#2BristleVoghiln1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("L#WALAH",@170)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#2BristleVoghiln1","MYAREA",20)
+RESPONSE #20
+	DisplayStringHead("L#WALAH",@171)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#2BristleVoghiln1","MYAREA",30)
+RESPONSE #30
+	DisplayStringHead("Voghiln",@172)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#2BristleVoghiln1","MYAREA",40)
+RESPONSE #40
+	DisplayStringHead("Voghiln",@173)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#2BristleVoghiln1","MYAREA",-1)
+END
+
+// GLINT
+
+IF
+	InMyArea(Player1)
+	!ActuallyInCombat()
+	!GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+	GlobalGT("L#SWalahGlint1","MYAREA",0)
+	Switch("L#SWalahGlint1","MYAREA")
+THEN
+RESPONSE #1
+	DisplayStringHead("L#WALAH",@174)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahGlint1","MYAREA",10)
+RESPONSE #10
+	DisplayStringHead("Glint",@175)
+	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
+	SetGlobal("L#SWalahGlint1","MYAREA",-1)
+END
+
+
+
+IF
+  !GlobalTimerNotExpired("BD_BANTER_DELAY","MYAREA")
+THEN
+  RESPONSE #100
+    SetAreaScript("",GENERAL)
+END
