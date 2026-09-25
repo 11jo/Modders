@@ -52,6 +52,6 @@ BEGIN @6 /* Verr'Sza - the rakshasa NPC for BG1EE */
   LABEL L#-VERRBGEE
   
 INCLUDE ~verrsza/library/verr_bg1.tpa~ 
-ACTION_IF GAME_IS ~bgee~ AND GAME_INCLUDES ~sod~ THEN BEGIN
+ACTION_IF GAME_INCLUDES ~sod~ THEN BEGIN
 INCLUDE ~verrsza/library/verr_sod.tpa~ 
 END

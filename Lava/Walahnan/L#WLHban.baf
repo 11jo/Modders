@@ -8,7 +8,7 @@ IF
 	Switch("L#SWalahDynaheir1","MYAREA")
 THEN
 RESPONSE #1
-	DisplayStringHead("L#SWalah",@111)
+	DisplayStringHead("L#Walah",@111)
 	SetGlobalTimer("BD_BANTER_DELAY","MYAREA",4)
 	SetGlobal("L#SWalahDynaheir1","MYAREA",10)
 RESPONSE #10
